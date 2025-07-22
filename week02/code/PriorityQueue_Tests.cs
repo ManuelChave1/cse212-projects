@@ -6,8 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
+    // Scenario: Enqueu books of mormon with priorites
+    // Expected Result: 1 Nephi-priority 1, Mosiah -2, Alma -3, jacob -4, Enos, Ether-6
     // Defect(s) Found: 
     public void TestPriorityQueue_1()
     {

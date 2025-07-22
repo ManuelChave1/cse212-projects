@@ -11,7 +11,10 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found:
+    //The function fails because was returning sue instead of espected bob
+    // Soluction changed the order the person list was adding new person by changing insert method 
+    // to add at enqueue function class PersonQueue.cs
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -44,6 +47,9 @@ public class TakingTurnsQueueTests
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
     // Defect(s) Found: 
+    //The function fails because was returning sue instead of espected bob
+    // Soluction changed the order the person list was adding new person by changing insert method 
+    // to add at enqueue function class PersonQueue.cs
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -86,6 +92,9 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
     // Defect(s) Found: 
+    //The function fails because was returning Sue instead of espected Tim
+    // The function GetNextPerson was not verifying and Add on the queue  persons with infitity turns or <= 0
+    //Solution Add verification for persons with infintity turns and add them to the end of the queue
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -117,6 +126,9 @@ public class TakingTurnsQueueTests
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
     // Defect(s) Found: 
+    //The function fails because was returning Sue instead of espected Tim
+    // For this  function was just implement the code resolve TestTakingTurnsQueue_ForeverZero()
+    //  error and was fixed
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
