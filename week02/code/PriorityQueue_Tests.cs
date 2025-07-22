@@ -6,23 +6,47 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: Enqueu books of mormon with priorites
-    // Expected Result: 1 Nephi-priority 1, Mosiah -2, Alma -3, jacob -4, Enos, Ether-6
+<<<<<<< HEAD
+   
+=======
+    // Scenario:Create a queue with the following people and priorities: Nephi (2), Alma (3), Jacob (1), Enos (6)
+    // Expected Result: Enos
+>>>>>>> 943fb5ac6c89e6fa382ae39d52752fa820631f9a
     // Defect(s) Found: 
+    //Assert.AreEqual failed. Expected Enos. Actual Alma
+    //The loop was excluding the last item(index < _queue.Count - 1), so in this case Enos was ignored when checking for the highest priority.
+    //solution: Remove -1 from the condition index < _queue.Count - 1 on Dequeue function
     public void TestPriorityQueue_1()
     {
+
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        priorityQueue.Enqueue("Nefi", 2);
+        priorityQueue.Enqueue("Alma", 3);
+        priorityQueue.Enqueue("Jacob", 1);
+        priorityQueue.Enqueue("Enos", 6);
+        var Result = priorityQueue.Dequeue();
+        Assert.AreEqual("Enos", Result);
     }
 
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
+    // Scenario:Create a queue with the following people and priorities:
+    //  Nephi (2), Alma (3),Mosiah (3) Jacob (3), Enos (1)
+    // Expected Result: Alma
     // Defect(s) Found: 
+    //Assert.AreEqual failed. Expected: Alma. Actual:Jacob
+    //Soluction: Replaced '>=' with '>' to ensure the first person with the highest priority is selected,
+   //rather than the last one as the error  show.
     public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        priorityQueue.Enqueue("Nephi", 2);
+        priorityQueue.Enqueue("Alma", 3);
+        priorityQueue.Enqueue("Mosiah", 3);
+        priorityQueue.Enqueue("Enos", 1);
+        priorityQueue.Enqueue("Jacob", 3);
+
+        var Result = priorityQueue.Dequeue();
+        Assert.AreEqual("Alma", Result);
     }
 
     // Add more test cases as needed below.

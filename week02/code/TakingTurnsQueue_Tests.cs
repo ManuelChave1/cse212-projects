@@ -11,7 +11,11 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
     // run until the queue is empty
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found:
+<<<<<<< HEAD
+   
+=======
+    // Defect(s) Found: 
+>>>>>>> 943fb5ac6c89e6fa382ae39d52752fa820631f9a
     //The function fails because was returning sue instead of espected bob
     // Soluction changed the order the person list was adding new person by changing insert method 
     // to add at enqueue function class PersonQueue.cs
@@ -125,10 +129,9 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: 
-    //The function fails because was returning Sue instead of espected Tim
-    // For this  function was just implement the code resolve TestTakingTurnsQueue_ForeverZero()
-    //  error and was fixed
+    // Defect(s) Found:
+     //The function fails because was returning Sue instead of espected Tim
+    // For this  function was just implement the code resolve TestTakingTurnsQueue_ForeverZero() eror and was fixed
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
