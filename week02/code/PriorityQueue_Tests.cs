@@ -31,7 +31,7 @@ public class PriorityQueueTests
     // Defect(s) Found: 
     //Assert.AreEqual failed. Expected: Alma. Actual:Jacob
     //Soluction: Replaced '>=' with '>' to ensure the first person with the highest priority is selected,
-   //rather than the last one as the error  show.
+    //rather than the last one as the error  show.
     public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
@@ -46,4 +46,9 @@ public class PriorityQueueTests
     }
 
     // Add more test cases as needed below.
+    //test methot that fails according to the grader
+    // Failed TestPriorityQueue_DequeueHighestPriorityAtFront [3 ms]
+    //Failed TestPriorityQueue_DequeueHighestPriorityAtMiddle
+    // Failed TestPriorityQueue_DequeueHighestPriorityAtBack 
+    // TestPriorityQueue_DequeueEqualPriority 
 }
