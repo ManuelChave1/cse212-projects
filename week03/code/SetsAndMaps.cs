@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Text;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -21,32 +23,79 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
-    }
 
-    /// <summary>
-    /// Read a census file and summarize the degrees (education)
-    /// earned by those contained in the file.  The summary
-    /// should be stored in a dictionary where the key is the
-    /// degree earned and the value is the number of people that 
-    /// have earned that degree.  The degree information is in
-    /// the 4th column of the file.  There is no header row in the
-    /// file.
-    /// </summary>
-    /// <param name="filename">The name of the file to read</param>
-    /// <returns>fixed array of divisors</returns>
-    public static Dictionary<string, int> SummarizeDegrees(string filename)
-    {
-        var degrees = new Dictionary<string, int>();
-        foreach (var line in File.ReadLines(filename))
+        // TODO Problem 1 - ADD YOUR CODE HERE
+        var wordSet = new HashSet<string>(words);
+        var result = new List<ValueTuple<string, string>>();
+
+        foreach (var word in words)
         {
-            var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            var wordReversed = wordReverted(word);
+            if (wordSet.Contains(wordReversed))
+            {
+                result.Add(ValueTuple.Create(word, wordReversed));
+                wordSet.Remove(word);
+                wordSet.Remove(wordReversed);
+            }
+        }
+        string[] resultArray = new string[result.Count];
+        for (int i = 0; i < result.Count; i++)
+        {
+            resultArray[i] = result[i].Item1 + result[i].Item2;
         }
 
-        return degrees;
+        return resultArray;
     }
+
+    public static string wordReverted(string word)
+    {
+        if (word == null)
+        {
+            throw new ArgumentException("Word is null");
+        }
+        Stack<char> stackWord = new Stack<char>();
+        StringBuilder wordreversed = new StringBuilder();
+
+        foreach (var item in word)
+        {
+            stackWord.Push(item);
+        }
+        while(stackWord.Count > 0)
+        {
+            wordreversed.Append(stackWord.Pop());
+        }
+
+
+        return wordreversed.ToString();
+
+    }
+  
+    
+    
+    
+
+    /// <summary>
+/// Read a census file and summarize the degrees (education)
+/// earned by those contained in the file.  The summary
+/// should be stored in a dictionary where the key is the
+/// degree earned and the value is the number of people that 
+/// have earned that degree.  The degree information is in
+/// the 4th column of the file.  There is no header row in the
+/// file.
+/// </summary>
+/// <param name="filename">The name of the file to read</param>
+/// <returns>fixed array of divisors</returns>
+public static Dictionary<string, int> SummarizeDegrees(string filename)
+{
+    var degrees = new Dictionary<string, int>();
+    foreach (var line in File.ReadLines(filename))
+    {
+        var fields = line.Split(",");
+        // TODO Problem 2 - ADD YOUR CODE HERE
+    }
+
+    return degrees;
+}
 
     /// <summary>
     /// Determine if 'word1' and 'word2' are anagrams.  An anagram
@@ -85,22 +134,22 @@ public static class SetsAndMaps
     /// 
     /// </summary>
     public static string[] EarthquakeDailySummary()
-    {
-        const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
-        using var client = new HttpClient();
-        using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
-        using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
-        using var reader = new StreamReader(jsonStream);
-        var json = reader.ReadToEnd();
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+{
+    const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+    using var client = new HttpClient();
+    using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
+    using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
+    using var reader = new StreamReader(jsonStream);
+    var json = reader.ReadToEnd();
+    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
+    var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
 
-        // TODO Problem 5:
-        // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
-        // on those classes so that the call to Deserialize above works properly.
-        // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
-        // 3. Return an array of these string descriptions.
-        return [];
-    }
+    // TODO Problem 5:
+    // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
+    // on those classes so that the call to Deserialize above works properly.
+    // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
+    // 3. Return an array of these string descriptions.
+    return [];
+}
 }

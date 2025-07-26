@@ -6,8 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class PriorityQueueTests
 {
     [TestMethod]
+
     // Scenario:Create a queue with the following people and priorities: Nephi (2), Alma (3), Jacob (1), Enos (6)
     // Expected Result: Enos
+
     // Defect(s) Found: 
     //Assert.AreEqual failed. Expected Enos. Actual Alma
     //The loop was excluding the last item(index < _queue.Count - 1), so in this case Enos was ignored when checking for the highest priority.
