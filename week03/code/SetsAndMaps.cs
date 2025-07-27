@@ -31,7 +31,7 @@ public static class SetsAndMaps
         foreach (var word in words)
         {
             var wordReversed = wordReverted(word);
-            if (wordSet.Contains(wordReversed))
+            if (wordSet.Contains(wordReversed) && word != wordReversed)
             {
                 result.Add(ValueTuple.Create(word, wordReversed));
                 wordSet.Remove(word);
@@ -41,7 +41,7 @@ public static class SetsAndMaps
         string[] resultArray = new string[result.Count];
         for (int i = 0; i < result.Count; i++)
         {
-            resultArray[i] = result[i].Item1 + result[i].Item2;
+            resultArray[i] = result[i].Item1 + "&" + result[i].Item2;
         }
 
         return resultArray;
@@ -69,9 +69,6 @@ public static class SetsAndMaps
         return wordreversed.ToString();
 
     }
-  
-    
-    
     
 
     /// <summary>
@@ -88,11 +85,21 @@ public static class SetsAndMaps
 public static Dictionary<string, int> SummarizeDegrees(string filename)
 {
     var degrees = new Dictionary<string, int>();
-    foreach (var line in File.ReadLines(filename))
-    {
-        var fields = line.Split(",");
-        // TODO Problem 2 - ADD YOUR CODE HERE
-    }
+        foreach (var line in File.ReadLines(filename))
+        {
+            var fields = line.Split(",");
+            // TODO Problem 2 - ADD YOUR CODE HERE
+            if (degrees.ContainsKey(fields[3]))
+            {
+                degrees[fields[3]]++;
+
+            }
+            else
+            {
+                degrees[fields[3]] =1;
+            }
+  
+        }
 
     return degrees;
 }
@@ -116,7 +123,18 @@ public static Dictionary<string, int> SummarizeDegrees(string filename)
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        string formatedWord1 = new string(word1.ToLower().Where(char.IsLetterOrDigit).ToArray());
+        string formatWord2 = new string(word2.ToLower().Where(char.IsLetterOrDigit).ToArray());
+
+        if(formatedWord1.Length != formatWord2.Length)
+        {
+            return false;
+        }
+         string word1Sorted= new string(formatedWord1.OrderBy(c => c).ToArray());
+         string word2Sorted = new string(formatWord2.OrderBy(c => c).ToArray());
+
+         bool result = word1Sorted == word2Sorted;
+        return result;
     }
 
     /// <summary>
